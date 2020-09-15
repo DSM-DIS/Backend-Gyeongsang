@@ -9,6 +9,10 @@ public class ParticipantId implements Serializable {
     private int diaryBook;
 
     public ParticipantId() {}
+    public ParticipantId(String user, int diaryBook) {
+        this.user = user;
+        this.diaryBook = diaryBook;
+    }
 
     @Override
     public boolean equals(Object o) {
