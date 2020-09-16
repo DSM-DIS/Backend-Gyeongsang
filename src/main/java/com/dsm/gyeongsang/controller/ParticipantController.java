@@ -4,6 +4,7 @@ import com.dsm.gyeongsang.domains.domain.DiaryBook;
 import com.dsm.gyeongsang.domains.domain.Participant;
 import com.dsm.gyeongsang.domains.domain.ParticipantId;
 import com.dsm.gyeongsang.domains.domain.User;
+import com.dsm.gyeongsang.domains.form.DiaryBookListResponseForm;
 import com.dsm.gyeongsang.domains.repository.DiaryBookRepository;
 import com.dsm.gyeongsang.domains.repository.ParticipantRepository;
 import com.dsm.gyeongsang.domains.repository.UserRepository;
@@ -11,12 +12,9 @@ import com.dsm.gyeongsang.utils.exception.CodeMismatchException;
 import com.dsm.gyeongsang.utils.exception.IdMismatchException;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.util.List;
 
 @RestController
 @RequestMapping("/diary")
@@ -50,5 +48,20 @@ public class ParticipantController {
         Participant participant = new Participant(user, diaryBook);
 
         participantRepository.save(participant);
+    }
+
+    @ApiOperation(value = "일기장 참여", notes = "participation_personnel_list 테이블에 code, User 매칭")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "정상적인 응답"),
+            @ApiResponse(code = 404, message = "아이디 매칭 실패 또는 코드 매칭 실패"),
+            @ApiResponse(code = 500, message = "500")
+    })
+    @GetMapping("/diary-book")
+    public DiaryBookListResponseForm viewDiaryBook(@ApiParam(value = "ididididid", required = true) @RequestParam("id") String id) {
+        List<DiaryBook> diaryBookList = participantRepository.findByUser(id);
+
+        DiaryBookListResponseForm form = new DiaryBookListResponseForm(diaryBookList);
+
+        return form;
     }
 }
