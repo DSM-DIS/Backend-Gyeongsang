@@ -50,10 +50,10 @@ public class ParticipantController {
         participantRepository.save(participant);
     }
 
-    @ApiOperation(value = "일기장 참여", notes = "participation_personnel_list 테이블에 code, User 매칭")
+    @ApiOperation(value = "일기장 보기", notes = "유저 아이디에 맞는 일기장 리스트 리턴")
     @ApiResponses({
             @ApiResponse(code = 200, message = "정상적인 응답"),
-            @ApiResponse(code = 404, message = "아이디 매칭 실패 또는 코드 매칭 실패"),
+            @ApiResponse(code = 404, message = "아이디에 맞는 일기장 찾을 수 없음"),
             @ApiResponse(code = 500, message = "500")
     })
     @GetMapping("/diary-book")
