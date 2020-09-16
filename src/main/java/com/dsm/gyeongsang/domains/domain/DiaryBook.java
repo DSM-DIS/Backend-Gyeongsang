@@ -1,5 +1,7 @@
 package com.dsm.gyeongsang.domains.domain;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,15 +11,19 @@ public class DiaryBook {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @ApiModelProperty(example = "ididididid", required = true)
     private int id;
 
     @Column(name = "name")
+    @ApiModelProperty(example = "내 소듕한 일기장", required = true)
     private String name;
 
     @Column(name = "code")
+    @ApiModelProperty(example = "030816", required = true)
     private String code;
 
     @Column(name = "owner")
+    @ApiModelProperty(example = "이진혁", required = true)
     private String owner;
 
     public DiaryBook() {}

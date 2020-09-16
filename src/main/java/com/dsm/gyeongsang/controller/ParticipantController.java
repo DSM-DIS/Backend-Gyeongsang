@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/diary")
 @Api(value = "Participant Controller")
 public class ParticipantController {
 
@@ -38,7 +37,7 @@ public class ParticipantController {
             @ApiResponse(code = 404, message = "아이디 매칭 실패 또는 코드 매칭 실패"),
             @ApiResponse(code = 500, message = "500")
     })
-    @PostMapping("/diary-participation")
+    @PostMapping("/diary/diary-participation")
     public void participate(@ApiParam(value = "ididididid", required = true) @RequestParam("id") String id,
                             @ApiParam(value = "030816", required = true) @RequestParam("code") String code) {
         DiaryBook diaryBook = diaryBookRepository.findByCode(code)
@@ -56,7 +55,7 @@ public class ParticipantController {
             @ApiResponse(code = 404, message = "아이디에 맞는 일기장 찾을 수 없음"),
             @ApiResponse(code = 500, message = "500")
     })
-    @GetMapping("/diary-book")
+    @GetMapping("/diary-book/diary-book")
     public DiaryBookListResponseForm viewDiaryBook(@ApiParam(value = "ididididid", required = true) @RequestParam("id") String id) {
         List<DiaryBook> diaryBookList = participantRepository.findByUser(id);
 
