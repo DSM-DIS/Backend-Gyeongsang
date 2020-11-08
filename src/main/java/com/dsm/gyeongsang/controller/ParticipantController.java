@@ -14,6 +14,7 @@ import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -31,36 +32,26 @@ public class ParticipantController {
         this.userRepository = userRepository;
     }
 
-    @ApiOperation(value = "일기장 참여", notes = "participation_personnel_list 테이블에 code, User 매칭")
-    @ApiResponses({
-            @ApiResponse(code = 200, message = "정상적인 응답"),
-            @ApiResponse(code = 404, message = "아이디 매칭 실패 또는 코드 매칭 실패"),
-            @ApiResponse(code = 500, message = "500")
-    })
-    @PostMapping("/diary/diary-participation")
-    public void participate(@ApiParam(value = "ididididid", required = true) @RequestParam("id") String id,
-                            @ApiParam(value = "030816", required = true) @RequestParam("code") String code) {
-        DiaryBook diaryBook = diaryBookRepository.findByCode(code)
-                .orElseThrow(() -> new CodeMismatchException());
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new IdMismatchException());
-        Participant participant = new Participant(user, diaryBook);
-
-        participantRepository.save(participant);
-    }
-
-    @ApiOperation(value = "일기장 보기", notes = "유저 아이디에 맞는 일기장 리스트 리턴")
-    @ApiResponses({
-            @ApiResponse(code = 200, message = "정상적인 응답"),
-            @ApiResponse(code = 404, message = "아이디에 맞는 일기장 찾을 수 없음"),
-            @ApiResponse(code = 500, message = "500")
-    })
-    @GetMapping("/diary-book/diary-book")
-    public DiaryBookListResponseForm viewDiaryBook(@ApiParam(value = "ididididid", required = true) @RequestParam("id") String id) {
-        List<DiaryBook> diaryBookList = participantRepository.findByUser(id);
+    @GetMapping("/repositories/diary-book")
+    public DiaryBookListResponseForm getDiaryBook(HttpServletRequest request) {
+        String userId = request.getHeader("userId");
+        List<DiaryBook> diaryBookList = participantRepository.findByUser(userId);
 
         DiaryBookListResponseForm form = new DiaryBookListResponseForm(diaryBookList);
 
         return form;
+    }
+
+    @PostMapping("/repositories/diary-book")
+    public void participate(HttpServletRequest request, @RequestBody String code) {
+        String userId = request.getHeader("userId");
+
+        DiaryBook diaryBook = diaryBookRepository.findByCode(code)
+                .orElseThrow(CodeMismatchException::new);
+        User user = userRepository.findById(userId)
+                .orElseThrow(IdMismatchException::new);
+        Participant participant = new Participant(user, diaryBook);
+
+        participantRepository.save(participant);
     }
 }
