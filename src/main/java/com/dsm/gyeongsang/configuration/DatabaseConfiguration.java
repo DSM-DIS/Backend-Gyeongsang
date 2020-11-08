@@ -1,4 +1,4 @@
-package com.dsm.gyeongsang;
+package com.dsm.gyeongsang.configuration;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.sql.DataSource;
 
 @Configuration
-public class SpringConfiguration {
+public class DatabaseConfiguration {
 
     @Value("${DATABASE_DRIVER:com.mysql.cj.jdbc.Driver}")
     private String driverClassName = "";
