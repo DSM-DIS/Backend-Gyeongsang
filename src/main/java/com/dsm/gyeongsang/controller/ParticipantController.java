@@ -37,6 +37,8 @@ public class ParticipantController {
         String userId = request.getHeader("userId");
         List<DiaryBook> diaryBookList = participantRepository.findByUser(userId);
 
+        diaryBookList.forEach(System.out::println);
+
         DiaryBookListResponseForm form = new DiaryBookListResponseForm(diaryBookList);
 
         return form;
