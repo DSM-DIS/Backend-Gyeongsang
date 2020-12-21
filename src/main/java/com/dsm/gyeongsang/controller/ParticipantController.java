@@ -35,11 +35,19 @@ public class ParticipantController {
     @GetMapping("/repositories/diary-book")
     public DiaryBookListResponseForm getDiaryBook(HttpServletRequest request) {
         String userId = request.getHeader("userId");
-        System.out.println("들어가기 전");
         List<DiaryBook> diaryBookList = participantRepository.findByUser(userId);
-        diaryBookList.forEach(System.out::println);
 
         DiaryBookListResponseForm form = new DiaryBookListResponseForm(diaryBookList);
+
+        form.getDiaryBookList()
+                .stream()
+                .forEach(d -> {
+                    System.out.println("id : " + d.getId());
+                    System.out.println("name : " + d.getName());
+                    System.out.println("code : " + d.getCode());
+                    System.out.println("owner : " + d.getOwner());
+                    System.out.println("----------------------------");
+                });
 
         return form;
     }
