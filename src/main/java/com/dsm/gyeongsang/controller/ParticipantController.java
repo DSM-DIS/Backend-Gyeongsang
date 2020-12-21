@@ -35,6 +35,7 @@ public class ParticipantController {
     @GetMapping("/repositories/diary-book")
     public DiaryBookListResponseForm getDiaryBook(HttpServletRequest request) {
         String userId = request.getHeader("userId");
+        System.out.println("들어가기 전");
         List<DiaryBook> diaryBookList = participantRepository.findByUser(userId);
 
         diaryBookList.forEach(System.out::println);
