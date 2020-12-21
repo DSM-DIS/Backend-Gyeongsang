@@ -11,7 +11,7 @@ public class DiaryBook {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    @ApiModelProperty(example = "ididididid", required = true)
+    @ApiModelProperty(example = "id", required = true)
     private int id;
 
     @Column(name = "name")

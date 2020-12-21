@@ -19,7 +19,7 @@ public class ParticipantCustomRepositoryImpl implements ParticipantCustomReposit
 
     @Override
     public List<DiaryBook> findByUser(String id) {
-        return entityManager.createQuery("SELECT p.diary_book_id FROM Participant p WHERE p.user_id = :userId", DiaryBook.class)
+        return entityManager.createQuery("SELECT p.diaryBook FROM Participant p WHERE p.user.id = :userId", DiaryBook.class)
                 .setParameter("userId", id)
                 .getResultList();
     }

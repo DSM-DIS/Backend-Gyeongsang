@@ -13,18 +13,13 @@ public class User {
     @Column(name = "id")
     private String id;
 
-    @Column(name = "pw")
-    private String pw;
+    @Column(name = "password")
+    private String password;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "username")
+    private String username;
 
     public User() {}
-    public User(String id, String pw, String name) {
-        this.id = id;
-        this.pw = pw;
-        this.name = name;
-    }
 
     public String getId() {
         return id;
@@ -34,19 +29,19 @@ public class User {
         this.id = id;
     }
 
-    public String getPw() {
-        return pw;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPw(String pw) {
-        this.pw = pw;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
