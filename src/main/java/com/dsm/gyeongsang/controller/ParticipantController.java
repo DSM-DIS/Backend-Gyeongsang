@@ -2,9 +2,8 @@ package com.dsm.gyeongsang.controller;
 
 import com.dsm.gyeongsang.domains.domain.DiaryBook;
 import com.dsm.gyeongsang.domains.domain.Participant;
-import com.dsm.gyeongsang.domains.domain.ParticipantId;
 import com.dsm.gyeongsang.domains.domain.User;
-import com.dsm.gyeongsang.domains.form.DiaryBookListResponseForm;
+import com.dsm.gyeongsang.domains.form.DiaryBookResponseForm;
 import com.dsm.gyeongsang.domains.repository.DiaryBookRepository;
 import com.dsm.gyeongsang.domains.repository.ParticipantRepository;
 import com.dsm.gyeongsang.domains.repository.UserRepository;
@@ -33,23 +32,10 @@ public class ParticipantController {
     }
 
     @GetMapping("/repositories/diary-book")
-    public DiaryBookListResponseForm getDiaryBook(HttpServletRequest request) {
+    public DiaryBookResponseForm getDiaryBook(HttpServletRequest request) {
         String userId = request.getHeader("userId");
         List<DiaryBook> diaryBookList = participantRepository.findByUser(userId);
-
-        DiaryBookListResponseForm form = new DiaryBookListResponseForm(diaryBookList);
-
-        form.getDiaryBookList()
-                .stream()
-                .forEach(d -> {
-                    System.out.println("id : " + d.getId());
-                    System.out.println("name : " + d.getName());
-                    System.out.println("code : " + d.getCode());
-                    System.out.println("owner : " + d.getOwner());
-                    System.out.println("----------------------------");
-                });
-
-        return form;
+        return new DiaryBookResponseForm(diaryBookList);
     }
 
     @PostMapping("/repositories/diary-book")
