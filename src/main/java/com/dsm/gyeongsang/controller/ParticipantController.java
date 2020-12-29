@@ -9,6 +9,7 @@ import com.dsm.gyeongsang.domains.repository.ParticipantRepository;
 import com.dsm.gyeongsang.domains.repository.UserRepository;
 import com.dsm.gyeongsang.utils.exception.CodeMismatchException;
 import com.dsm.gyeongsang.utils.exception.IdMismatchException;
+import com.google.gson.Gson;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
