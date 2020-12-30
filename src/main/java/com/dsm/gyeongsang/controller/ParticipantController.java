@@ -44,6 +44,7 @@ public class ParticipantController {
     public void participate(HttpServletRequest request, @RequestBody String code) {
         String userId = request.getHeader("userId");
         CodeRequestForm codeRequestForm = new Gson().fromJson(code, CodeRequestForm.class);
+        System.out.println("code : " + codeRequestForm.getCode());
 
         DiaryBook diaryBook = diaryBookRepository.findByCode(codeRequestForm.getCode())
                 .orElseThrow(CodeMismatchException::new);
