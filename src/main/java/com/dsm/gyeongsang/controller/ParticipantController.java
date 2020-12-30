@@ -3,6 +3,7 @@ package com.dsm.gyeongsang.controller;
 import com.dsm.gyeongsang.domains.domain.DiaryBook;
 import com.dsm.gyeongsang.domains.domain.Participant;
 import com.dsm.gyeongsang.domains.domain.User;
+import com.dsm.gyeongsang.domains.form.CodeRequestForm;
 import com.dsm.gyeongsang.domains.form.DiaryBookResponseForm;
 import com.dsm.gyeongsang.domains.repository.DiaryBookRepository;
 import com.dsm.gyeongsang.domains.repository.ParticipantRepository;
@@ -42,8 +43,9 @@ public class ParticipantController {
     @PostMapping("/repositories/diary-book")
     public void participate(HttpServletRequest request, @RequestBody String code) {
         String userId = request.getHeader("userId");
+        CodeRequestForm codeRequestForm = new Gson().fromJson(code, CodeRequestForm.class);
 
-        DiaryBook diaryBook = diaryBookRepository.findByCode(code)
+        DiaryBook diaryBook = diaryBookRepository.findByCode(codeRequestForm.getCode())
                 .orElseThrow(CodeMismatchException::new);
         User user = userRepository.findById(userId)
                 .orElseThrow(IdMismatchException::new);
