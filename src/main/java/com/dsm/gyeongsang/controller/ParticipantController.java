@@ -35,6 +35,7 @@ public class ParticipantController {
 
     @GetMapping("/repositories/diary-book")
     public DiaryBookResponseForm getDiaryBook(HttpServletRequest request) {
+        System.out.println("getgetget");
         String userId = request.getHeader("userId");
         List<DiaryBook> diaryBookList = participantRepository.findByUser(userId);
         return new DiaryBookResponseForm(diaryBookList);
@@ -42,6 +43,7 @@ public class ParticipantController {
 
     @PostMapping("/repositories/diary-book")
     public void participate(HttpServletRequest request, @RequestBody String code) {
+        System.out.println("postpostpost");
         String userId = request.getHeader("userId");
         CodeRequestForm codeRequestForm = new Gson().fromJson(code, CodeRequestForm.class);
         System.out.println("code : " + codeRequestForm.getCode());
