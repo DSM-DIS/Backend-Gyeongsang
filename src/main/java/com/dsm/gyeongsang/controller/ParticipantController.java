@@ -35,9 +35,11 @@ public class ParticipantController {
 
     @GetMapping("/repositories/diary-book")
     public DiaryBookResponseForm getDiaryBook(HttpServletRequest request) {
-        System.out.println("getgetget");
         String userId = request.getHeader("userId");
+        System.out.println("getgetget :: " + userId);
         List<DiaryBook> diaryBookList = participantRepository.findByUser(userId);
+        diaryBookList.forEach(System.out::println);
+        System.out.println("-----------------------");
         return new DiaryBookResponseForm(diaryBookList);
     }
 
