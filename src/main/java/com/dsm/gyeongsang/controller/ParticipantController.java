@@ -45,11 +45,11 @@ public class ParticipantController {
 
 //    @PostMapping("/repositories/diary-book")
     @PostMapping("/aaaa")
-    public void participate(HttpServletRequest request, @RequestBody String code) {
+    public void participate(HttpServletRequest request, @RequestBody String body) {
         System.out.println("postpostpost");
-        System.out.println("code1 :" + code);
+        System.out.println("code1 :" + body);
         String userId = request.getHeader("userId");
-        CodeRequestForm codeRequestForm = new Gson().fromJson(code, CodeRequestForm.class);
+        CodeRequestForm codeRequestForm = new Gson().fromJson(body, CodeRequestForm.class);
         System.out.println("code2 : " + codeRequestForm.getCode());
 
         DiaryBook diaryBook = diaryBookRepository.findByCode(codeRequestForm.getCode())
