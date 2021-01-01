@@ -43,7 +43,8 @@ public class ParticipantController {
         return new DiaryBookResponseForm(diaryBookList);
     }
 
-    @PostMapping("/repositories/diary-book")
+//    @PostMapping("/repositories/diary-book")
+    @PostMapping("/aaaa")
     public void participate(HttpServletRequest request, @RequestBody String code) {
         System.out.println("postpostpost");
         System.out.println("code1 :" + code);
