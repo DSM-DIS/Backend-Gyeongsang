@@ -46,9 +46,10 @@ public class ParticipantController {
     @PostMapping("/repositories/diary-book")
     public void participate(HttpServletRequest request, @RequestBody String code) {
         System.out.println("postpostpost");
+        System.out.println("code1 :" + code);
         String userId = request.getHeader("userId");
         CodeRequestForm codeRequestForm = new Gson().fromJson(code, CodeRequestForm.class);
-        System.out.println("code : " + codeRequestForm.getCode());
+        System.out.println("code2 : " + codeRequestForm.getCode());
 
         DiaryBook diaryBook = diaryBookRepository.findByCode(codeRequestForm.getCode())
                 .orElseThrow(CodeMismatchException::new);
